@@ -1,8 +1,14 @@
 jquery.cityChoice.js
 ====================
 
+三级联动选择（如：地区/省份/城市 ）的功能
+
 
 ### Initialization
+
+#### Demo
+
+http://wilee.me/demo/cityChoice/demo.html 
 
 #### HTML
 
