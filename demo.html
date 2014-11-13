@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8">
+    <title>JsonEdit Demo</title>
+    <script type="text/javascript" src="public/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="jquery.cityChoice.js"></script>
+    <link rel="stylesheet" type="text/css" href="jquery.cityChoice.css" media="all">
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+    <h1>cityChoice</h1>
+    </div>
+    <div class="page-content">
+        <div id="cityChoiceContent"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function(){
+    if( !'__proto__' in {} ){
+        alert('用这浏览器！你逗我。。');
+    }
+
+    var cityData = [{"value":1,"name":"华东","content":[{"value":9,"name":"上海","content":[{"value":73,"name":"上海"}]},{"value":10,"name":"江苏","content":[{"value":74,"name":"南京"},{"value":75,"name":"无锡"},{"value":76,"name":"徐州"},{"value":77,"name":"常州"},{"value":78,"name":"苏州"},{"value":79,"name":"南通"},{"value":80,"name":"连云港"},{"value":81,"name":"淮安"},{"value":82,"name":"盐城"},{"value":83,"name":"扬州"},{"value":84,"name":"镇江"},{"value":85,"name":"泰州"},{"value":86,"name":"宿迁"}]},{"value":11,"name":"浙江","content":[{"value":87,"name":"杭州"},{"value":88,"name":"宁波"},{"value":89,"name":"温州"},{"value":90,"name":"嘉兴"},{"value":91,"name":"湖州"},{"value":92,"name":"绍兴"},{"value":93,"name":"金华"},{"value":94,"name":"衢州"},{"value":95,"name":"舟山"},{"value":96,"name":"台州"},{"value":97,"name":"丽水"}]},{"value":12,"name":"安徽","content":[{"value":98,"name":"合肥"},{"value":99,"name":"芜湖"},{"value":100,"name":"蚌埠"},{"value":101,"name":"淮南"},{"value":102,"name":"马鞍山"},{"value":103,"name":"淮北"},{"value":104,"name":"铜陵"},{"value":105,"name":"安庆"},{"value":106,"name":"黄山"},{"value":107,"name":"滁州"},{"value":108,"name":"阜阳"},{"value":109,"name":"宿州"},{"value":110,"name":"六安"},{"value":111,"name":"亳州"},{"value":112,"name":"池州"},{"value":113,"name":"宣城"}]},{"value":14,"name":"江西","content":[{"value":123,"name":"南昌"},{"value":124,"name":"景德镇"},{"value":125,"name":"萍乡"},{"value":126,"name":"九江"},{"value":127,"name":"新余"},{"value":128,"name":"鹰潭"},{"value":129,"name":"赣州"},{"value":130,"name":"吉安"},{"value":131,"name":"宜春"},{"value":132,"name":"抚州"},{"value":133,"name":"上饶"}]}]},{"value":2,"name":"华北","content":[{"value":1,"name":"北京","content":[{"value":1,"name":"北京"}]},{"value":2,"name":"天津","content":[{"value":2,"name":"天津"}]},{"value":3,"name":"河北","content":[{"value":3,"name":"石家庄"},{"value":4,"name":"唐山"},{"value":5,"name":"秦皇岛"},{"value":6,"name":"邯郸"},{"value":7,"name":"邢台"},{"value":8,"name":"保定"},{"value":9,"name":"张家口"},{"value":10,"name":"承德"},{"value":11,"name":"沧州"},{"value":12,"name":"廊坊"},{"value":13,"name":"衡水"}]},{"value":4,"name":"山西","content":[{"value":14,"name":"太原"},{"value":15,"name":"大同"},{"value":16,"name":"阳泉"},{"value":17,"name":"长治"},{"value":18,"name":"晋城"},{"value":19,"name":"朔州"},{"value":20,"name":"晋中"},{"value":21,"name":"运城"},{"value":22,"name":"忻州"},{"value":23,"name":"临汾"},{"value":24,"name":"吕梁"}]},{"value":5,"name":"内蒙古自治区","content":[{"value":25,"name":"呼和浩特"},{"value":26,"name":"包头"},{"value":27,"name":"乌海"},{"value":28,"name":"赤峰"},{"value":29,"name":"通辽"},{"value":30,"name":"鄂尔多斯"},{"value":31,"name":"呼伦贝尔"},{"value":32,"name":"巴彦淖尔"},{"value":33,"name":"乌兰察布"},{"value":34,"name":"兴安盟"},{"value":35,"name":"锡林郭勒盟"},{"value":36,"name":"阿拉善盟"}]},{"value":15,"name":"山东","content":[{"value":134,"name":"济南"},{"value":135,"name":"青岛"},{"value":136,"name":"淄博"},{"value":137,"name":"枣庄"},{"value":138,"name":"东营"},{"value":139,"name":"烟台"},{"value":140,"name":"潍坊"},{"value":141,"name":"济宁"},{"value":142,"name":"泰安"},{"value":143,"name":"威海"},{"value":144,"name":"日照"},{"value":145,"name":"莱芜"},{"value":146,"name":"临沂"},{"value":147,"name":"德州"},{"value":148,"name":"聊城"},{"value":149,"name":"滨州"},{"value":150,"name":"菏泽"}]}]},{"value":3,"name":"华中","content":[{"value":16,"name":"河南","content":[{"value":151,"name":"郑州"},{"value":152,"name":"开封"},{"value":153,"name":"洛阳"},{"value":154,"name":"平顶山"},{"value":155,"name":"安阳"},{"value":156,"name":"鹤壁"},{"value":157,"name":"新乡"},{"value":158,"name":"焦作"},{"value":159,"name":"济源"},{"value":160,"name":"濮阳"},{"value":161,"name":"许昌"},{"value":162,"name":"漯河"},{"value":163,"name":"三门峡"},{"value":164,"name":"南阳"},{"value":165,"name":"商丘"},{"value":166,"name":"信阳"},{"value":167,"name":"周口"},{"value":168,"name":"驻马店"}]},{"value":17,"name":"湖北","content":[{"value":169,"name":"武汉"},{"value":170,"name":"黄石"},{"value":171,"name":"十堰"},{"value":172,"name":"宜昌"},{"value":173,"name":"襄阳"},{"value":174,"name":"鄂州"},{"value":175,"name":"荆门"},{"value":176,"name":"孝感"},{"value":177,"name":"荆州"},{"value":178,"name":"黄冈"},{"value":179,"name":"咸宁"},{"value":180,"name":"随州"},{"value":181,"name":"恩施土家族苗族自治州"},{"value":182,"name":"仙桃"},{"value":183,"name":"潜江"},{"value":184,"name":"天门"},{"value":185,"name":"神农架林区"}]},{"value":18,"name":"湖南","content":[{"value":186,"name":"长沙"},{"value":187,"name":"株洲"},{"value":188,"name":"湘潭"},{"value":189,"name":"衡阳"},{"value":190,"name":"邵阳"},{"value":191,"name":"岳阳"},{"value":192,"name":"常德"},{"value":193,"name":"张家界"},{"value":194,"name":"益阳"},{"value":195,"name":"郴州"},{"value":196,"name":"永州"},{"value":197,"name":"怀化"},{"value":198,"name":"娄底"},{"value":199,"name":"湘西土家族苗族自治州"}]}]},{"value":4,"name":"华南","content":[{"value":13,"name":"福建","content":[{"value":114,"name":"福州"},{"value":115,"name":"厦门"},{"value":116,"name":"莆田"},{"value":117,"name":"三明"},{"value":118,"name":"泉州"},{"value":119,"name":"漳州"},{"value":120,"name":"南平"},{"value":121,"name":"龙岩"},{"value":122,"name":"宁德"}]},{"value":19,"name":"广东","content":[{"value":200,"name":"广州"},{"value":201,"name":"韶关"},{"value":202,"name":"深圳"},{"value":203,"name":"珠海"},{"value":204,"name":"汕头"},{"value":205,"name":"佛山"},{"value":206,"name":"江门"},{"value":207,"name":"湛江"},{"value":208,"name":"茂名"},{"value":209,"name":"肇庆"},{"value":210,"name":"惠州"},{"value":211,"name":"梅州"},{"value":212,"name":"汕尾"},{"value":213,"name":"河源"},{"value":214,"name":"阳江"},{"value":215,"name":"清远"},{"value":216,"name":"东莞"},{"value":217,"name":"中山"},{"value":218,"name":"潮州"},{"value":219,"name":"揭阳"},{"value":220,"name":"云浮"}]},{"value":20,"name":"广西壮族自治区","content":[{"value":221,"name":"南宁"},{"value":222,"name":"柳州"},{"value":223,"name":"桂林"},{"value":224,"name":"梧州"},{"value":225,"name":"北海"},{"value":226,"name":"防城港"},{"value":227,"name":"钦州"},{"value":228,"name":"贵港"},{"value":229,"name":"玉林"},{"value":230,"name":"百色"},{"value":231,"name":"贺州"},{"value":232,"name":"河池"},{"value":233,"name":"来宾"},{"value":234,"name":"崇左"}]},{"value":21,"name":"海南","content":[{"value":235,"name":"海口"},{"value":236,"name":"三亚"},{"value":237,"name":"五指山"},{"value":238,"name":"琼海"},{"value":239,"name":"儋州"},{"value":240,"name":"文昌"},{"value":241,"name":"万宁"},{"value":242,"name":"东方"},{"value":243,"name":"定安"},{"value":244,"name":"屯昌"},{"value":245,"name":"澄迈"},{"value":246,"name":"临高"},{"value":247,"name":"白沙黎族自治县"},{"value":248,"name":"昌江黎族自治县"},{"value":249,"name":"乐东黎族自治县"},{"value":250,"name":"陵水黎族自治县"},{"value":251,"name":"保亭黎族苗族自治县"},{"value":252,"name":"琼中黎族苗族自治县"},{"value":253,"name":"西沙群岛"},{"value":254,"name":"南沙群岛"},{"value":255,"name":"中沙群岛的岛礁及其海域"}]}]},{"value":5,"name":"东北","content":[{"value":6,"name":"辽宁","content":[{"value":37,"name":"沈阳"},{"value":38,"name":"大连"},{"value":39,"name":"鞍山"},{"value":40,"name":"抚顺"},{"value":41,"name":"本溪"},{"value":42,"name":"丹东"},{"value":43,"name":"锦州"},{"value":44,"name":"营口"},{"value":45,"name":"阜新"},{"value":46,"name":"辽阳"},{"value":47,"name":"盘锦"},{"value":48,"name":"铁岭"},{"value":49,"name":"朝阳"},{"value":50,"name":"葫芦岛"}]},{"value":7,"name":"吉林","content":[{"value":51,"name":"长春"},{"value":52,"name":"吉林"},{"value":53,"name":"四平"},{"value":54,"name":"辽源"},{"value":55,"name":"通化"},{"value":56,"name":"白山"},{"value":57,"name":"松原"},{"value":58,"name":"白城"},{"value":59,"name":"延边朝鲜族自治州"}]},{"value":8,"name":"黑龙江","content":[{"value":60,"name":"哈尔滨"},{"value":61,"name":"齐齐哈尔"},{"value":62,"name":"鸡西"},{"value":63,"name":"鹤岗"},{"value":64,"name":"双鸭山"},{"value":65,"name":"大庆"},{"value":66,"name":"伊春"},{"value":67,"name":"佳木斯"},{"value":68,"name":"七台河"},{"value":69,"name":"牡丹江"},{"value":70,"name":"黑河"},{"value":71,"name":"绥化"},{"value":72,"name":"大兴安岭地区"}]}]},{"value":6,"name":"西北","content":[{"value":27,"name":"陕西","content":[{"value":310,"name":"西安"},{"value":311,"name":"铜川"},{"value":312,"name":"宝鸡"},{"value":313,"name":"咸阳"},{"value":314,"name":"渭南"},{"value":315,"name":"延安"},{"value":316,"name":"汉中"},{"value":317,"name":"榆林"},{"value":318,"name":"安康"},{"value":319,"name":"商洛"}]},{"value":28,"name":"甘肃","content":[{"value":320,"name":"兰州"},{"value":321,"name":"嘉峪关"},{"value":322,"name":"金昌"},{"value":323,"name":"白银"},{"value":324,"name":"天水"},{"value":325,"name":"武威"},{"value":326,"name":"张掖"},{"value":327,"name":"平凉"},{"value":328,"name":"酒泉"},{"value":329,"name":"庆阳"},{"value":330,"name":"定西"},{"value":331,"name":"陇南"},{"value":332,"name":"临夏回族自治州"},{"value":333,"name":"甘南藏族自治州"}]},{"value":29,"name":"青海","content":[{"value":334,"name":"西宁"},{"value":335,"name":"海东地区"},{"value":336,"name":"海北藏族自治州"},{"value":337,"name":"黄南藏族自治州"},{"value":338,"name":"海南藏族自治州"},{"value":339,"name":"果洛藏族自治州"},{"value":340,"name":"玉树藏族自治州"},{"value":341,"name":"海西蒙古族藏族自治州"}]},{"value":30,"name":"宁夏回族自治区","content":[{"value":342,"name":"银川"},{"value":343,"name":"石嘴山"},{"value":344,"name":"吴忠"},{"value":345,"name":"固原"},{"value":346,"name":"中卫"}]},{"value":31,"name":"新疆维吾尔自治区","content":[{"value":347,"name":"乌鲁木齐"},{"value":348,"name":"克拉玛依"},{"value":349,"name":"吐鲁番地区"},{"value":350,"name":"哈密地区"},{"value":351,"name":"昌吉回族自治州"},{"value":352,"name":"博尔塔拉蒙古自治州"},{"value":353,"name":"巴音郭楞蒙古自治州"},{"value":354,"name":"阿克苏地区"},{"value":355,"name":"克孜勒苏柯尔克孜自治州"},{"value":356,"name":"喀什地区"},{"value":357,"name":"和田地区"},{"value":358,"name":"伊犁哈萨克自治州"},{"value":359,"name":"塔城地区"},{"value":360,"name":"阿勒泰地区"},{"value":361,"name":"石河子"},{"value":362,"name":"阿拉尔"},{"value":363,"name":"图木舒克"},{"value":364,"name":"五家渠"}]}]},{"value":7,"name":"西南","content":[{"value":22,"name":"重庆","content":[{"value":256,"name":"重庆"}]},{"value":23,"name":"四川","content":[{"value":257,"name":"成都"},{"value":258,"name":"自贡"},{"value":259,"name":"攀枝花"},{"value":260,"name":"泸州"},{"value":261,"name":"德阳"},{"value":262,"name":"绵阳"},{"value":263,"name":"广元"},{"value":264,"name":"遂宁"},{"value":265,"name":"内江"},{"value":266,"name":"乐山"},{"value":267,"name":"南充"},{"value":268,"name":"眉山"},{"value":269,"name":"宜宾"},{"value":270,"name":"广安"},{"value":271,"name":"达州"},{"value":272,"name":"雅安"},{"value":273,"name":"巴中"},{"value":274,"name":"资阳"},{"value":275,"name":"阿坝藏族羌族自治州"},{"value":276,"name":"甘孜藏族自治州"},{"value":277,"name":"凉山彝族自治州"}]},{"value":24,"name":"贵州","content":[{"value":278,"name":"贵阳"},{"value":279,"name":"六盘水"},{"value":280,"name":"遵义"},{"value":281,"name":"安顺"},{"value":282,"name":"铜仁地区"},{"value":283,"name":"黔西南布依族苗族自治州"},{"value":284,"name":"毕节地区"},{"value":285,"name":"黔东南苗族侗族自治州"},{"value":286,"name":"黔南布依族苗族自治州"}]},{"value":25,"name":"云南","content":[{"value":287,"name":"昆明"},{"value":288,"name":"曲靖"},{"value":289,"name":"玉溪"},{"value":290,"name":"保山"},{"value":291,"name":"昭通"},{"value":292,"name":"丽江"},{"value":293,"name":"普洱"},{"value":294,"name":"临沧"},{"value":295,"name":"楚雄彝族自治州"},{"value":296,"name":"红河哈尼族彝族自治州"},{"value":297,"name":"文山壮族苗族自治州"},{"value":298,"name":"西双版纳傣族自治州"},{"value":299,"name":"大理白族自治州"},{"value":300,"name":"德宏傣族景颇族自治州"},{"value":301,"name":"怒江傈僳族自治州"},{"value":302,"name":"迪庆藏族自治州"}]},{"value":26,"name":"西藏自治区","content":[{"value":303,"name":"拉萨"},{"value":304,"name":"昌都地区"},{"value":305,"name":"山南地区"},{"value":306,"name":"日喀则地区"},{"value":307,"name":"那曲地区"},{"value":308,"name":"阿里地区"},{"value":309,"name":"林芝地区"}]}]},{"value":8,"name":"港澳台","content":[{"value":32,"name":"台湾","content":[{"value":365,"name":"台北"},{"value":366,"name":"高雄"},{"value":367,"name":"台南"},{"value":368,"name":"台中"},{"value":369,"name":"金门县"},{"value":370,"name":"南投县"},{"value":371,"name":"基隆"},{"value":372,"name":"新竹"},{"value":373,"name":"嘉义"},{"value":374,"name":"新北"},{"value":375,"name":"依兰县"},{"value":376,"name":"新竹县"},{"value":377,"name":"桃园县"},{"value":378,"name":"苗栗县"},{"value":379,"name":"彰化县"},{"value":380,"name":"嘉义县"},{"value":381,"name":"云林县"},{"value":382,"name":"屏东县"},{"value":383,"name":"台东县"},{"value":384,"name":"花莲县"},{"value":385,"name":"澎湖县"}]},{"value":33,"name":"香港特别行政区","content":[{"value":386,"name":"香港岛"},{"value":387,"name":"九龙"},{"value":388,"name":"新界"}]},{"value":34,"name":"澳门特别行政区","content":[{"value":389,"name":"澳门半岛"},{"value":390,"name":"离岛"}]}]}];
+
+    var edit = $("#cityChoiceContent").cityChoice({
+        cityData:cityData,
+        hasFooter:true
+    });
+
+/*
+[
+  {
+    "value": 1,
+    "name": "华东",
+    "content": [
+      {
+        "value": 9,
+        "name": "上海",
+        "content": [
+          {
+            "value": 73,
+            "name": "上海"
+          }
+        ]
+      },
+      {
+        "value": 10,
+        "name": "江苏",
+        "content": [
+          {
+            "value": 74,
+            "name": "南京"
+          },
+          {
+            "value": 75,
+            "name": "无锡"
+          },
+          {
+            "value": 76,
+            "name": "徐州"
+          },
+          {
+            "value": 77,
+            "name": "常州"
+          },
+          {
+            "value": 78,
+            "name": "苏州"
+          },
+          {
+            "value": 79,
+            "name": "南通"
+          },
+          {
+            "value": 80,
+            "name": "连云港"
+          },
+          {
+            "value": 81,
+            "name": "淮安"
+          },
+          {
+            "value": 82,
+            "name": "盐城"
+          },
+          {
+            "value": 83,
+            "name": "扬州"
+          },
+          {
+            "value": 84,
+            "name": "镇江"
+          },
+          {
+            "value": 85,
+            "name": "泰州"
+          },
+          {
+            "value": 86,
+            "name": "宿迁"
+          }
+        ]
+      },
+      {
+        "value": 11,
+        "name": "浙江",
+        "content": [
+          {
+            "value": 87,
+            "name": "杭州"
+          },
+          {
+            "value": 88,
+            "name": "宁波"
+          },
+          {
+            "value": 89,
+            "name": "温州"
+          },
+          {
+            "value": 90,
+            "name": "嘉兴"
+          },
+          {
+            "value": 91,
+            "name": "湖州"
+          },
+          {
+            "value": 92,
+            "name": "绍兴"
+          },
+          {
+            "value": 93,
+            "name": "金华"
+          },
+          {
+            "value": 94,
+            "name": "衢州"
+          },
+          {
+            "value": 95,
+            "name": "舟山"
+          },
+          {
+            "value": 96,
+            "name": "台州"
+          },
+          {
+            "value": 97,
+            "name": "丽水"
+          }
+        ]
+      },
+      {
+        "value": 12,
+        "name": "安徽",
+        "content": [
+          {
+            "value": 98,
+            "name": "合肥"
+          },
+          {
+            "value": 99,
+            "name": "芜湖"
+          },
+          {
+            "value": 100,
+            "name": "蚌埠"
+          },
+          {
+            "value": 101,
+            "name": "淮南"
+          },
+          {
+            "value": 102,
+            "name": "马鞍山"
+          },
+          {
+            "value": 103,
+            "name": "淮北"
+          },
+          {
+            "value": 104,
+            "name": "铜陵"
+          },
+          {
+            "value": 105,
+            "name": "安庆"
+          },
+          {
+            "value": 106,
+            "name": "黄山"
+          },
+          {
+            "value": 107,
+            "name": "滁州"
+          },
+          {
+            "value": 108,
+            "name": "阜阳"
+          },
+          {
+            "value": 109,
+            "name": "宿州"
+          },
+          {
+            "value": 110,
+            "name": "六安"
+          },
+          {
+            "value": 111,
+            "name": "亳州"
+          },
+          {
+            "value": 112,
+            "name": "池州"
+          },
+          {
+            "value": 113,
+            "name": "宣城"
+          }
+        ]
+      },
+      {
+        "value": 14,
+        "name": "江西",
+        "content": [
+          {
+            "value": 123,
+            "name": "南昌"
+          },
+          {
+            "value": 124,
+            "name": "景德镇"
+          },
+          {
+            "value": 125,
+            "name": "萍乡"
+          },
+          {
+            "value": 126,
+            "name": "九江"
+          },
+          {
+            "value": 127,
+            "name": "新余"
+          },
+          {
+            "value": 128,
+            "name": "鹰潭"
+          },
+          {
+            "value": 129,
+            "name": "赣州"
+          },
+          {
+            "value": 130,
+            "name": "吉安"
+          },
+          {
+            "value": 131,
+            "name": "宜春"
+          },
+          {
+            "value": 132,
+            "name": "抚州"
+          },
+          {
+            "value": 133,
+            "name": "上饶"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "value": 2,
+    "name": "华北",
+    "content": [
+      {
+        "value": 1,
+        "name": "北京",
+        "content": [
+          {
+            "value": 1,
+            "name": "北京"
+          }
+        ]
+      },
+      {
+        "value": 2,
+        "name": "天津",
+        "content": [
+          {
+            "value": 2,
+            "name": "天津"
+          }
+        ]
+      },
+      {
+        "value": 3,
+        "name": "河北",
+        "content": [
+          {
+            "value": 3,
+            "name": "石家庄"
+          },
+          {
+            "value": 4,
+            "name": "唐山"
+          },
+          {
+            "value": 5,
+            "name": "秦皇岛"
+          },
+          {
+            "value": 6,
+            "name": "邯郸"
+          },
+          {
+            "value": 7,
+            "name": "邢台"
+          },
+          {
+            "value": 8,
+            "name": "保定"
+          },
+          {
+            "value": 9,
+            "name": "张家口"
+          },
+          {
+            "value": 10,
+            "name": "承德"
+          },
+          {
+            "value": 11,
+            "name": "沧州"
+          },
+          {
+            "value": 12,
+            "name": "廊坊"
+          },
+          {
+            "value": 13,
+            "name": "衡水"
+          }
+        ]
+      },
+      {
+        "value": 4,
+        "name": "山西",
+        "content": [
+          {
+            "value": 14,
+            "name": "太原"
+          },
+          {
+            "value": 15,
+            "name": "大同"
+          },
+          {
+            "value": 16,
+            "name": "阳泉"
+          },
+          {
+            "value": 17,
+            "name": "长治"
+          },
+          {
+            "value": 18,
+            "name": "晋城"
+          },
+          {
+            "value": 19,
+            "name": "朔州"
+          },
+          {
+            "value": 20,
+            "name": "晋中"
+          },
+          {
+            "value": 21,
+            "name": "运城"
+          },
+          {
+            "value": 22,
+            "name": "忻州"
+          },
+          {
+            "value": 23,
+            "name": "临汾"
+          },
+          {
+            "value": 24,
+            "name": "吕梁"
+          }
+        ]
+      },
+      {
+        "value": 5,
+        "name": "内蒙古自治区",
+        "content": [
+          {
+            "value": 25,
+            "name": "呼和浩特"
+          },
+          {
+            "value": 26,
+            "name": "包头"
+          },
+          {
+            "value": 27,
+            "name": "乌海"
+          },
+          {
+            "value": 28,
+            "name": "赤峰"
+          },
+          {
+            "value": 29,
+            "name": "通辽"
+          },
+          {
+            "value": 30,
+            "name": "鄂尔多斯"
+          },
+          {
+            "value": 31,
+            "name": "呼伦贝尔"
+          },
+          {
+            "value": 32,
+            "name": "巴彦淖尔"
+          },
+          {
+            "value": 33,
+            "name": "乌兰察布"
+          },
+          {
+            "value": 34,
+            "name": "兴安盟"
+          },
+          {
+            "value": 35,
+            "name": "锡林郭勒盟"
+          },
+          {
+            "value": 36,
+            "name": "阿拉善盟"
+          }
+        ]
+      },
+      {
+        "value": 15,
+        "name": "山东",
+        "content": [
+          {
+            "value": 134,
+            "name": "济南"
+          },
+          {
+            "value": 135,
+            "name": "青岛"
+          },
+          {
+            "value": 136,
+            "name": "淄博"
+          },
+          {
+            "value": 137,
+            "name": "枣庄"
+          },
+          {
+            "value": 138,
+            "name": "东营"
+          },
+          {
+            "value": 139,
+            "name": "烟台"
+          },
+          {
+            "value": 140,
+            "name": "潍坊"
+          },
+          {
+            "value": 141,
+            "name": "济宁"
+          },
+          {
+            "value": 142,
+            "name": "泰安"
+          },
+          {
+            "value": 143,
+            "name": "威海"
+          },
+          {
+            "value": 144,
+            "name": "日照"
+          },
+          {
+            "value": 145,
+            "name": "莱芜"
+          },
+          {
+            "value": 146,
+            "name": "临沂"
+          },
+          {
+            "value": 147,
+            "name": "德州"
+          },
+          {
+            "value": 148,
+            "name": "聊城"
+          },
+          {
+            "value": 149,
+            "name": "滨州"
+          },
+          {
+            "value": 150,
+            "name": "菏泽"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "value": 3,
+    "name": "华中",
+    "content": [
+      {
+        "value": 16,
+        "name": "河南",
+        "content": [
+          {
+            "value": 151,
+            "name": "郑州"
+          },
+          {
+            "value": 152,
+            "name": "开封"
+          },
+          {
+            "value": 153,
+            "name": "洛阳"
+          },
+          {
+            "value": 154,
+            "name": "平顶山"
+          },
+          {
+            "value": 155,
+            "name": "安阳"
+          },
+          {
+            "value": 156,
+            "name": "鹤壁"
+          },
+          {
+            "value": 157,
+            "name": "新乡"
+          },
+          {
+            "value": 158,
+            "name": "焦作"
+          },
+          {
+            "value": 159,
+            "name": "济源"
+          },
+          {
+            "value": 160,
+            "name": "濮阳"
+          },
+          {
+            "value": 161,
+            "name": "许昌"
+          },
+          {
+            "value": 162,
+            "name": "漯河"
+          },
+          {
+            "value": 163,
+            "name": "三门峡"
+          },
+          {
+            "value": 164,
+            "name": "南阳"
+          },
+          {
+            "value": 165,
+            "name": "商丘"
+          },
+          {
+            "value": 166,
+            "name": "信阳"
+          },
+          {
+            "value": 167,
+            "name": "周口"
+          },
+          {
+            "value": 168,
+            "name": "驻马店"
+          }
+        ]
+      },
+      {
+        "value": 17,
+        "name": "湖北",
+        "content": [
+          {
+            "value": 169,
+            "name": "武汉"
+          },
+          {
+            "value": 170,
+            "name": "黄石"
+          },
+          {
+            "value": 171,
+            "name": "十堰"
+          },
+          {
+            "value": 172,
+            "name": "宜昌"
+          },
+          {
+            "value": 173,
+            "name": "襄阳"
+          },
+          {
+            "value": 174,
+            "name": "鄂州"
+          },
+          {
+            "value": 175,
+            "name": "荆门"
+          },
+          {
+            "value": 176,
+            "name": "孝感"
+          },
+          {
+            "value": 177,
+            "name": "荆州"
+          },
+          {
+            "value": 178,
+            "name": "黄冈"
+          },
+          {
+            "value": 179,
+            "name": "咸宁"
+          },
+          {
+            "value": 180,
+            "name": "随州"
+          },
+          {
+            "value": 181,
+            "name": "恩施土家族苗族自治州"
+          },
+          {
+            "value": 182,
+            "name": "仙桃"
+          },
+          {
+            "value": 183,
+            "name": "潜江"
+          },
+          {
+            "value": 184,
+            "name": "天门"
+          },
+          {
+            "value": 185,
+            "name": "神农架林区"
+          }
+        ]
+      },
+      {
+        "value": 18,
+        "name": "湖南",
+        "content": [
+          {
+            "value": 186,
+            "name": "长沙"
+          },
+          {
+            "value": 187,
+            "name": "株洲"
+          },
+          {
+            "value": 188,
+            "name": "湘潭"
+          },
+          {
+            "value": 189,
+            "name": "衡阳"
+          },
+          {
+            "value": 190,
+            "name": "邵阳"
+          },
+          {
+            "value": 191,
+            "name": "岳阳"
+          },
+          {
+            "value": 192,
+            "name": "常德"
+          },
+          {
+            "value": 193,
+            "name": "张家界"
+          },
+          {
+            "value": 194,
+            "name": "益阳"
+          },
+          {
+            "value": 195,
+            "name": "郴州"
+          },
+          {
+            "value": 196,
+            "name": "永州"
+          },
+          {
+            "value": 197,
+            "name": "怀化"
+          },
+          {
+            "value": 198,
+            "name": "娄底"
+          },
+          {
+            "value": 199,
+            "name": "湘西土家族苗族自治州"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "value": 4,
+    "name": "华南",
+    "content": [
+      {
+        "value": 13,
+        "name": "福建",
+        "content": [
+          {
+            "value": 114,
+            "name": "福州"
+          },
+          {
+            "value": 115,
+            "name": "厦门"
+          },
+          {
+            "value": 116,
+            "name": "莆田"
+          },
+          {
+            "value": 117,
+            "name": "三明"
+          },
+          {
+            "value": 118,
+            "name": "泉州"
+          },
+          {
+            "value": 119,
+            "name": "漳州"
+          },
+          {
+            "value": 120,
+            "name": "南平"
+          },
+          {
+            "value": 121,
+            "name": "龙岩"
+          },
+          {
+            "value": 122,
+            "name": "宁德"
+          }
+        ]
+      },
+      {
+        "value": 19,
+        "name": "广东",
+        "content": [
+          {
+            "value": 200,
+            "name": "广州"
+          },
+          {
+            "value": 201,
+            "name": "韶关"
+          },
+          {
+            "value": 202,
+            "name": "深圳"
+          },
+          {
+            "value": 203,
+            "name": "珠海"
+          },
+          {
+            "value": 204,
+            "name": "汕头"
+          },
+          {
+            "value": 205,
+            "name": "佛山"
+          },
+          {
+            "value": 206,
+            "name": "江门"
+          },
+          {
+            "value": 207,
+            "name": "湛江"
+          },
+          {
+            "value": 208,
+            "name": "茂名"
+          },
+          {
+            "value": 209,
+            "name": "肇庆"
+          },
+          {
+            "value": 210,
+            "name": "惠州"
+          },
+          {
+            "value": 211,
+            "name": "梅州"
+          },
+          {
+            "value": 212,
+            "name": "汕尾"
+          },
+          {
+            "value": 213,
+            "name": "河源"
+          },
+          {
+            "value": 214,
+            "name": "阳江"
+          },
+          {
+            "value": 215,
+            "name": "清远"
+          },
+          {
+            "value": 216,
+            "name": "东莞"
+          },
+          {
+            "value": 217,
+            "name": "中山"
+          },
+          {
+            "value": 218,
+            "name": "潮州"
+          },
+          {
+            "value": 219,
+            "name": "揭阳"
+          },
+          {
+            "value": 220,
+            "name": "云浮"
+          }
+        ]
+      },
+      {
+        "value": 20,
+        "name": "广西壮族自治区",
+        "content": [
+          {
+            "value": 221,
+            "name": "南宁"
+          },
+          {
+            "value": 222,
+            "name": "柳州"
+          },
+          {
+            "value": 223,
+            "name": "桂林"
+          },
+          {
+            "value": 224,
+            "name": "梧州"
+          },
+          {
+            "value": 225,
+            "name": "北海"
+          },
+          {
+            "value": 226,
+            "name": "防城港"
+          },
+          {
+            "value": 227,
+            "name": "钦州"
+          },
+          {
+            "value": 228,
+            "name": "贵港"
+          },
+          {
+            "value": 229,
+            "name": "玉林"
+          },
+          {
+            "value": 230,
+            "name": "百色"
+          },
+          {
+            "value": 231,
+            "name": "贺州"
+          },
+          {
+            "value": 232,
+            "name": "河池"
+          },
+          {
+            "value": 233,
+            "name": "来宾"
+          },
+          {
+            "value": 234,
+            "name": "崇左"
+          }
+        ]
+      },
+      {
+        "value": 21,
+        "name": "海南",
+        "content": [
+          {
+            "value": 235,
+            "name": "海口"
+          },
+          {
+            "value": 236,
+            "name": "三亚"
+          },
+          {
+            "value": 237,
+            "name": "五指山"
+          },
+          {
+            "value": 238,
+            "name": "琼海"
+          },
+          {
+            "value": 239,
+            "name": "儋州"
+          },
+          {
+            "value": 240,
+            "name": "文昌"
+          },
+          {
+            "value": 241,
+            "name": "万宁"
+          },
+          {
+            "value": 242,
+            "name": "东方"
+          },
+          {
+            "value": 243,
+            "name": "定安"
+          },
+          {
+            "value": 244,
+            "name": "屯昌"
+          },
+          {
+            "value": 245,
+            "name": "澄迈"
+          },
+          {
+            "value": 246,
+            "name": "临高"
+          },
+          {
+            "value": 247,
+            "name": "白沙黎族自治县"
+          },
+          {
+            "value": 248,
+            "name": "昌江黎族自治县"
+          },
+          {
+            "value": 249,
+            "name": "乐东黎族自治县"
+          },
+          {
+            "value": 250,
+            "name": "陵水黎族自治县"
+          },
+          {
+            "value": 251,
+            "name": "保亭黎族苗族自治县"
+          },
+          {
+            "value": 252,
+            "name": "琼中黎族苗族自治县"
+          },
+          {
+            "value": 253,
+            "name": "西沙群岛"
+          },
+          {
+            "value": 254,
+            "name": "南沙群岛"
+          },
+          {
+            "value": 255,
+            "name": "中沙群岛的岛礁及其海域"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "value": 5,
+    "name": "东北",
+    "content": [
+      {
+        "value": 6,
+        "name": "辽宁",
+        "content": [
+          {
+            "value": 37,
+            "name": "沈阳"
+          },
+          {
+            "value": 38,
+            "name": "大连"
+          },
+          {
+            "value": 39,
+            "name": "鞍山"
+          },
+          {
+            "value": 40,
+            "name": "抚顺"
+          },
+          {
+            "value": 41,
+            "name": "本溪"
+          },
+          {
+            "value": 42,
+            "name": "丹东"
+          },
+          {
+            "value": 43,
+            "name": "锦州"
+          },
+          {
+            "value": 44,
+            "name": "营口"
+          },
+          {
+            "value": 45,
+            "name": "阜新"
+          },
+          {
+            "value": 46,
+            "name": "辽阳"
+          },
+          {
+            "value": 47,
+            "name": "盘锦"
+          },
+          {
+            "value": 48,
+            "name": "铁岭"
+          },
+          {
+            "value": 49,
+            "name": "朝阳"
+          },
+          {
+            "value": 50,
+            "name": "葫芦岛"
+          }
+        ]
+      },
+      {
+        "value": 7,
+        "name": "吉林",
+        "content": [
+          {
+            "value": 51,
+            "name": "长春"
+          },
+          {
+            "value": 52,
+            "name": "吉林"
+          },
+          {
+            "value": 53,
+            "name": "四平"
+          },
+          {
+            "value": 54,
+            "name": "辽源"
+          },
+          {
+            "value": 55,
+            "name": "通化"
+          },
+          {
+            "value": 56,
+            "name": "白山"
+          },
+          {
+            "value": 57,
+            "name": "松原"
+          },
+          {
+            "value": 58,
+            "name": "白城"
+          },
+          {
+            "value": 59,
+            "name": "延边朝鲜族自治州"
+          }
+        ]
+      },
+      {
+        "value": 8,
+        "name": "黑龙江",
+        "content": [
+          {
+            "value": 60,
+            "name": "哈尔滨"
+          },
+          {
+            "value": 61,
+            "name": "齐齐哈尔"
+          },
+          {
+            "value": 62,
+            "name": "鸡西"
+          },
+          {
+            "value": 63,
+            "name": "鹤岗"
+          },
+          {
+            "value": 64,
+            "name": "双鸭山"
+          },
+          {
+            "value": 65,
+            "name": "大庆"
+          },
+          {
+            "value": 66,
+            "name": "伊春"
+          },
+          {
+            "value": 67,
+            "name": "佳木斯"
+          },
+          {
+            "value": 68,
+            "name": "七台河"
+          },
+          {
+            "value": 69,
+            "name": "牡丹江"
+          },
+          {
+            "value": 70,
+            "name": "黑河"
+          },
+          {
+            "value": 71,
+            "name": "绥化"
+          },
+          {
+            "value": 72,
+            "name": "大兴安岭地区"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "value": 6,
+    "name": "西北",
+    "content": [
+      {
+        "value": 27,
+        "name": "陕西",
+        "content": [
+          {
+            "value": 310,
+            "name": "西安"
+          },
+          {
+            "value": 311,
+            "name": "铜川"
+          },
+          {
+            "value": 312,
+            "name": "宝鸡"
+          },
+          {
+            "value": 313,
+            "name": "咸阳"
+          },
+          {
+            "value": 314,
+            "name": "渭南"
+          },
+          {
+            "value": 315,
+            "name": "延安"
+          },
+          {
+            "value": 316,
+            "name": "汉中"
+          },
+          {
+            "value": 317,
+            "name": "榆林"
+          },
+          {
+            "value": 318,
+            "name": "安康"
+          },
+          {
+            "value": 319,
+            "name": "商洛"
+          }
+        ]
+      },
+      {
+        "value": 28,
+        "name": "甘肃",
+        "content": [
+          {
+            "value": 320,
+            "name": "兰州"
+          },
+          {
+            "value": 321,
+            "name": "嘉峪关"
+          },
+          {
+            "value": 322,
+            "name": "金昌"
+          },
+          {
+            "value": 323,
+            "name": "白银"
+          },
+          {
+            "value": 324,
+            "name": "天水"
+          },
+          {
+            "value": 325,
+            "name": "武威"
+          },
+          {
+            "value": 326,
+            "name": "张掖"
+          },
+          {
+            "value": 327,
+            "name": "平凉"
+          },
+          {
+            "value": 328,
+            "name": "酒泉"
+          },
+          {
+            "value": 329,
+            "name": "庆阳"
+          },
+          {
+            "value": 330,
+            "name": "定西"
+          },
+          {
+            "value": 331,
+            "name": "陇南"
+          },
+          {
+            "value": 332,
+            "name": "临夏回族自治州"
+          },
+          {
+            "value": 333,
+            "name": "甘南藏族自治州"
+          }
+        ]
+      },
+      {
+        "value": 29,
+        "name": "青海",
+        "content": [
+          {
+            "value": 334,
+            "name": "西宁"
+          },
+          {
+            "value": 335,
+            "name": "海东地区"
+          },
+          {
+            "value": 336,
+            "name": "海北藏族自治州"
+          },
+          {
+            "value": 337,
+            "name": "黄南藏族自治州"
+          },
+          {
+            "value": 338,
+            "name": "海南藏族自治州"
+          },
+          {
+            "value": 339,
+            "name": "果洛藏族自治州"
+          },
+          {
+            "value": 340,
+            "name": "玉树藏族自治州"
+          },
+          {
+            "value": 341,
+            "name": "海西蒙古族藏族自治州"
+          }
+        ]
+      },
+      {
+        "value": 30,
+        "name": "宁夏回族自治区",
+        "content": [
+          {
+            "value": 342,
+            "name": "银川"
+          },
+          {
+            "value": 343,
+            "name": "石嘴山"
+          },
+          {
+            "value": 344,
+            "name": "吴忠"
+          },
+          {
+            "value": 345,
+            "name": "固原"
+          },
+          {
+            "value": 346,
+            "name": "中卫"
+          }
+        ]
+      },
+      {
+        "value": 31,
+        "name": "新疆维吾尔自治区",
+        "content": [
+          {
+            "value": 347,
+            "name": "乌鲁木齐"
+          },
+          {
+            "value": 348,
+            "name": "克拉玛依"
+          },
+          {
+            "value": 349,
+            "name": "吐鲁番地区"
+          },
+          {
+            "value": 350,
+            "name": "哈密地区"
+          },
+          {
+            "value": 351,
+            "name": "昌吉回族自治州"
+          },
+          {
+            "value": 352,
+            "name": "博尔塔拉蒙古自治州"
+          },
+          {
+            "value": 353,
+            "name": "巴音郭楞蒙古自治州"
+          },
+          {
+            "value": 354,
+            "name": "阿克苏地区"
+          },
+          {
+            "value": 355,
+            "name": "克孜勒苏柯尔克孜自治州"
+          },
+          {
+            "value": 356,
+            "name": "喀什地区"
+          },
+          {
+            "value": 357,
+            "name": "和田地区"
+          },
+          {
+            "value": 358,
+            "name": "伊犁哈萨克自治州"
+          },
+          {
+            "value": 359,
+            "name": "塔城地区"
+          },
+          {
+            "value": 360,
+            "name": "阿勒泰地区"
+          },
+          {
+            "value": 361,
+            "name": "石河子"
+          },
+          {
+            "value": 362,
+            "name": "阿拉尔"
+          },
+          {
+            "value": 363,
+            "name": "图木舒克"
+          },
+          {
+            "value": 364,
+            "name": "五家渠"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "value": 7,
+    "name": "西南",
+    "content": [
+      {
+        "value": 22,
+        "name": "重庆",
+        "content": [
+          {
+            "value": 256,
+            "name": "重庆"
+          }
+        ]
+      },
+      {
+        "value": 23,
+        "name": "四川",
+        "content": [
+          {
+            "value": 257,
+            "name": "成都"
+          },
+          {
+            "value": 258,
+            "name": "自贡"
+          },
+          {
+            "value": 259,
+            "name": "攀枝花"
+          },
+          {
+            "value": 260,
+            "name": "泸州"
+          },
+          {
+            "value": 261,
+            "name": "德阳"
+          },
+          {
+            "value": 262,
+            "name": "绵阳"
+          },
+          {
+            "value": 263,
+            "name": "广元"
+          },
+          {
+            "value": 264,
+            "name": "遂宁"
+          },
+          {
+            "value": 265,
+            "name": "内江"
+          },
+          {
+            "value": 266,
+            "name": "乐山"
+          },
+          {
+            "value": 267,
+            "name": "南充"
+          },
+          {
+            "value": 268,
+            "name": "眉山"
+          },
+          {
+            "value": 269,
+            "name": "宜宾"
+          },
+          {
+            "value": 270,
+            "name": "广安"
+          },
+          {
+            "value": 271,
+            "name": "达州"
+          },
+          {
+            "value": 272,
+            "name": "雅安"
+          },
+          {
+            "value": 273,
+            "name": "巴中"
+          },
+          {
+            "value": 274,
+            "name": "资阳"
+          },
+          {
+            "value": 275,
+            "name": "阿坝藏族羌族自治州"
+          },
+          {
+            "value": 276,
+            "name": "甘孜藏族自治州"
+          },
+          {
+            "value": 277,
+            "name": "凉山彝族自治州"
+          }
+        ]
+      },
+      {
+        "value": 24,
+        "name": "贵州",
+        "content": [
+          {
+            "value": 278,
+            "name": "贵阳"
+          },
+          {
+            "value": 279,
+            "name": "六盘水"
+          },
+          {
+            "value": 280,
+            "name": "遵义"
+          },
+          {
+            "value": 281,
+            "name": "安顺"
+          },
+          {
+            "value": 282,
+            "name": "铜仁地区"
+          },
+          {
+            "value": 283,
+            "name": "黔西南布依族苗族自治州"
+          },
+          {
+            "value": 284,
+            "name": "毕节地区"
+          },
+          {
+            "value": 285,
+            "name": "黔东南苗族侗族自治州"
+          },
+          {
+            "value": 286,
+            "name": "黔南布依族苗族自治州"
+          }
+        ]
+      },
+      {
+        "value": 25,
+        "name": "云南",
+        "content": [
+          {
+            "value": 287,
+            "name": "昆明"
+          },
+          {
+            "value": 288,
+            "name": "曲靖"
+          },
+          {
+            "value": 289,
+            "name": "玉溪"
+          },
+          {
+            "value": 290,
+            "name": "保山"
+          },
+          {
+            "value": 291,
+            "name": "昭通"
+          },
+          {
+            "value": 292,
+            "name": "丽江"
+          },
+          {
+            "value": 293,
+            "name": "普洱"
+          },
+          {
+            "value": 294,
+            "name": "临沧"
+          },
+          {
+            "value": 295,
+            "name": "楚雄彝族自治州"
+          },
+          {
+            "value": 296,
+            "name": "红河哈尼族彝族自治州"
+          },
+          {
+            "value": 297,
+            "name": "文山壮族苗族自治州"
+          },
+          {
+            "value": 298,
+            "name": "西双版纳傣族自治州"
+          },
+          {
+            "value": 299,
+            "name": "大理白族自治州"
+          },
+          {
+            "value": 300,
+            "name": "德宏傣族景颇族自治州"
+          },
+          {
+            "value": 301,
+            "name": "怒江傈僳族自治州"
+          },
+          {
+            "value": 302,
+            "name": "迪庆藏族自治州"
+          }
+        ]
+      },
+      {
+        "value": 26,
+        "name": "西藏自治区",
+        "content": [
+          {
+            "value": 303,
+            "name": "拉萨"
+          },
+          {
+            "value": 304,
+            "name": "昌都地区"
+          },
+          {
+            "value": 305,
+            "name": "山南地区"
+          },
+          {
+            "value": 306,
+            "name": "日喀则地区"
+          },
+          {
+            "value": 307,
+            "name": "那曲地区"
+          },
+          {
+            "value": 308,
+            "name": "阿里地区"
+          },
+          {
+            "value": 309,
+            "name": "林芝地区"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "value": 8,
+    "name": "港澳台",
+    "content": [
+      {
+        "value": 32,
+        "name": "台湾",
+        "content": [
+          {
+            "value": 365,
+            "name": "台北"
+          },
+          {
+            "value": 366,
+            "name": "高雄"
+          },
+          {
+            "value": 367,
+            "name": "台南"
+          },
+          {
+            "value": 368,
+            "name": "台中"
+          },
+          {
+            "value": 369,
+            "name": "金门县"
+          },
+          {
+            "value": 370,
+            "name": "南投县"
+          },
+          {
+            "value": 371,
+            "name": "基隆"
+          },
+          {
+            "value": 372,
+            "name": "新竹"
+          },
+          {
+            "value": 373,
+            "name": "嘉义"
+          },
+          {
+            "value": 374,
+            "name": "新北"
+          },
+          {
+            "value": 375,
+            "name": "依兰县"
+          },
+          {
+            "value": 376,
+            "name": "新竹县"
+          },
+          {
+            "value": 377,
+            "name": "桃园县"
+          },
+          {
+            "value": 378,
+            "name": "苗栗县"
+          },
+          {
+            "value": 379,
+            "name": "彰化县"
+          },
+          {
+            "value": 380,
+            "name": "嘉义县"
+          },
+          {
+            "value": 381,
+            "name": "云林县"
+          },
+          {
+            "value": 382,
+            "name": "屏东县"
+          },
+          {
+            "value": 383,
+            "name": "台东县"
+          },
+          {
+            "value": 384,
+            "name": "花莲县"
+          },
+          {
+            "value": 385,
+            "name": "澎湖县"
+          }
+        ]
+      },
+      {
+        "value": 33,
+        "name": "香港特别行政区",
+        "content": [
+          {
+            "value": 386,
+            "name": "香港岛"
+          },
+          {
+            "value": 387,
+            "name": "九龙"
+          },
+          {
+            "value": 388,
+            "name": "新界"
+          }
+        ]
+      },
+      {
+        "value": 34,
+        "name": "澳门特别行政区",
+        "content": [
+          {
+            "value": 389,
+            "name": "澳门半岛"
+          },
+          {
+            "value": 390,
+            "name": "离岛"
+          }
+        ]
+      }
+    ]
+  }
+]
+**/
+});
+
+</script>
+    
+</body>
+</html>

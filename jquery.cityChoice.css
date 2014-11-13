@@ -1,0 +1,155 @@
+html,body,div,h1,h2,h3,h4,h5,h6,ul,ol,dl,li,dt,dd,p,blockquote,pre,form,fieldset,table,th,td,map{margin:0;padding:0}* html,* html body{background-image:url(about:blank);background-attachment:fixed}ul,ol,dl,li{list-style:none}pre{white-space:pre-wrap;word-wrap:break-word}
+.choiceCity .choiceCity_dl {
+    padding-left: 15px;
+    padding-right: 15px
+}
+
+.choiceCity .choiceCity_dl:before,.choiceCity .choiceCity_dl:after {
+    display: block;
+    content: ""
+}
+
+.choiceCity .choiceCity_dl:after {
+    clear: both
+}
+
+.choiceCity .choiceCity_dl .choiceCity_dt,.choiceCity .choiceCity_dl .choiceCity_dd {
+    float: left;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: block;
+    min-width: 80px;
+    border: 1px solid transparent
+}
+
+.choiceCity .choiceCity_dl .choiceCity_dt {
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px
+}
+
+.choiceCity .choiceCity_dl .choiceCity_dd {
+    position: relative;
+    padding-left: 0;
+    padding-right: 0
+}
+
+.choiceCity .choiceCity_dl .choiceCity_dd .choiceCity_sub_dl {
+    position: absolute;
+    display: none
+}
+
+.choiceCity .choiceCity_dl .choiceCity_dd .choiceCity_label {
+    margin-left: 5px;
+    margin-right: 5px
+}
+
+.choiceCity .choiceCity_dl .choiceCity_dd .choiceCity_label .choiceCity_label_text {
+    font-style: normal;
+    font-size: 12px
+}
+
+.choiceCity .choiceCity_dl .choiceCity_dd_active {
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+    border-bottom-color: transparent;
+    z-index: 30
+}
+
+.choiceCity .choiceCity_dl .choiceCity_dd_active .choiceCity_sub_dl {
+    display: block;
+    width: 340px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+    left: -1px;
+    top: 40px
+}
+
+.choiceCity .choiceCity_dl .choiceCity_dd_active .choiceCity_sub_dl:before,.choiceCity .choiceCity_dl .choiceCity_dd_active .choiceCity_sub_dl:after {
+    display: block;
+    content: ""
+}
+
+.choiceCity .choiceCity_dl .choiceCity_dd_active .choiceCity_sub_dl:after {
+    clear: both
+}
+
+.choiceCity .choiceCity_dl .choiceCity_dd_active .choiceCity_sub_dl .choiceCity_sub_dd {
+    float: left;
+    padding-top: 5px;
+    padding-bottom: 5px
+}
+
+.choiceCity .choiceCity_dl .choiceCity_dd_active .choiceCity_sub_dl .choiceCity_sub_footer {
+    display: block;
+    position: relative;
+    text-align: center;
+    padding: 5px;
+    clear: both
+}
+
+.choiceCity .choiceCity_dl .choiceCity_dd_active .choiceCity_sub_dl .choiceCity_sub_footer .btn {
+    border: none
+}
+
+.choiceCity .choiceCity_dl .choiceCity_dd_active .float_line {
+    background-color: #fff;
+    z-index: 31
+}
+
+.choiceCity .choiceCity_dl .float_line {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 2px;
+    top: 5px
+}
+
+.choiceCity .choiceCity_dl .arrow_down {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    margin-right: 10px;
+    border-top: 5px solid #999999;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    cursor: pointer
+}
+
+.choiceCity .choiceCity_dl .arrow_down:hover {
+    border-top-color: #999999
+}
+
+.choiceCity .choiceCity_dl:nth-child(2n) {
+    background-color: #f7f7f7
+}
+
+.choiceCity .choiceCity_checkbox_useless {
+    cursor: not-allowed;
+    opacity: .5
+}
+
+.choiceCity .choiceCity_checkbox_useless .choiceCity_label {
+    cursor: not-allowed
+}
+
+.choiceCity .choiceCity_checkbox_useless .arrow_down {
+    cursor: not-allowed
+}
+
+.choiceCity .choiceCity_footer {
+    background-color: #fff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center
+}
+
+.choiceCity .choiceCity_footer .choiceCity_btn {
+    height: 30px;
+    width: 80px;
+    margin-right: 10px;
+    border: none
+}
