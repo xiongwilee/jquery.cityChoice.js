@@ -34,7 +34,7 @@ http://wilee.me/jquery.cityChoice.js/example/
 | hasFooter | 否 | bool | true | 是否有底部的确定取消按钮 |
 | hasLabelText | 否 | bool | true | 是否需要文字第二级选中数目提示 |
 
-** 城市数据格式： **
+**城市数据格式：**
 
     [{
         value:1,
