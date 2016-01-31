@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Jquery.citychoice.js by xiongwilee</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Jquery.citychoice.js</h1>
+        <p class="header">三级联动选择的jquery插件，jquery.cityChoice.js</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/xiongwilee/jquery.cityChoice.js/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/xiongwilee/jquery.cityChoice.js/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/xiongwilee/jquery.cityChoice.js">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/xiongwilee">xiongwilee</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a id="jquerycitychoicejs" class="anchor" href="#jquerycitychoicejs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>jquery.cityChoice.js</h1>
+
+<p>三级联动选择（如：地区/省份/城市 ）的功能</p>
+
+<h3>
+<a id="initialization" class="anchor" href="#initialization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Initialization</h3>
+
+<h4>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Demo</h4>
+
+<p><a href="http://wilee.me/demo/cityChoice/demo.html">http://wilee.me/demo/cityChoice/demo.html</a> </p>
+
+<h4>
+<a id="html" class="anchor" href="#html" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>HTML</h4>
+
+<pre><code>&lt;div id="cityChoiceContainer"&gt;&lt;/div&gt;
+</code></pre>
+
+<h4>
+<a id="js" class="anchor" href="#js" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JS</h4>
+
+<pre><code>var instance = $('#cityChoiceContainer').cityChoice({
+    ele:'',//如果配置了rednerId 则在实例化时就进行渲染，否则需要通过render方法渲染
+    cityData: [{...}],
+    hasFooter: true,//是否需要底部的确定取消按钮，
+    hasLabelText:true//是否需要文字第二级选中数目提示
+});
+
+instance.render('#cityChoiceContainer');
+</code></pre>
+
+<h2>
+<a id="配置" class="anchor" href="#%E9%85%8D%E7%BD%AE" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>配置</h2>
+
+<table>
+<thead>
+<tr>
+<th>#配置参数</th>
+<th>是否必须</th>
+<th>类型</th>
+<th>默认</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ele</td>
+<td>否</td>
+<td>string/ele</td>
+<td>''</td>
+<td>如果配置了rednerId 则在实例化时就进行渲染，否则通过render方法渲染</td>
+</tr>
+<tr>
+<td>cityData</td>
+<td>是</td>
+<td>object</td>
+<td>[]</td>
+<td>请参考下方城市数据格式</td>
+</tr>
+<tr>
+<td>hasFooter</td>
+<td>否</td>
+<td>bool</td>
+<td>true</td>
+<td>是否有底部的确定取消按钮</td>
+</tr>
+<tr>
+<td>hasLabelText</td>
+<td>否</td>
+<td>bool</td>
+<td>true</td>
+<td>是否需要文字第二级选中数目提示</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>城市数据格式：</strong></p>
+
+<pre><code>[{
+    value:1,
+    name:'华东',
+    content:[{
+        value:10,
+        name:'江苏',
+        content:[...]
+    },{
+        ...
+    }]
+},{
+    ...
+}]
+</code></pre>
+
+<h2>
+<a id="方法" class="anchor" href="#%E6%96%B9%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>方法</h2>
+
+<h3>
+<a id="首先实例化citychoice类" class="anchor" href="#%E9%A6%96%E5%85%88%E5%AE%9E%E4%BE%8B%E5%8C%96citychoice%E7%B1%BB" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>首先实例化cityChoice类</h3>
+
+<pre><code>var cityChoice = require('common:component/cityChoice');
+
+var instance = new cityChoice(options)
+</code></pre>
+
+<h3>
+<a id="配置参数说明" class="anchor" href="#%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>配置参数说明</h3>
+
+<table>
+<thead>
+<tr>
+<th>#方法名</th>
+<th>示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>render</td>
+<td><pre>instance.render('#cityChoiceContainer');</pre></td>
+<td>渲染到 选择器#cityChoiceContainer中</td>
+</tr>
+<tr>
+<td>setDefault</td>
+<td><pre>instance.setDefault([[3],[2,1,0],[2,0,0]]);</pre></td>
+<td>设置默认选择的选择项目，indexData</td>
+</tr>
+<tr>
+<td>setUseless</td>
+<td><pre>instance.setUseless([73, 75, 81, 1, 2, 3, 4]);</pre></td>
+<td>设置不允许选择的选项</td>
+</tr>
+<tr>
+<td>getFormData</td>
+<td><pre>instance.getFormData()</pre></td>
+<td>获取所有已选择了的数据项</td>
+</tr>
+<tr>
+<td>getSelected</td>
+<td><pre>instance.getSelected()</pre></td>
+<td>获取已选择了的节点及参数，详细参数说明请看源码</td>
+</tr>
+<tr>
+<td>formToIndex</td>
+<td><pre>instance.formToIndex([])</pre></td>
+<td>将form格式数据转化为index格式数据 return {indexData,selectNames}</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="事件" class="anchor" href="#%E4%BA%8B%E4%BB%B6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>事件</h2>
+
+<h3>
+<a id="使用实例" class="anchor" href="#%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>使用实例</h3>
+
+<pre><code>/*
+ @ 绑定事件名为test的自定义事件
+ @ obj.on('test',function(evt,[opt]){})
+ @ return null
+*/
+instance.on('test',function(evt,option){
+    console.log(option);//返回参数
+    evt.returnValue = false;//阻止默认事件
+})
+</code></pre>
+
+<h3>
+<a id="详细配置" class="anchor" href="#%E8%AF%A6%E7%BB%86%E9%85%8D%E7%BD%AE" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>详细配置</h3>
+
+<table>
+<thead>
+<tr>
+<th>#事件名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>change</td>
+<td>表单发生改变</td>
+</tr>
+<tr>
+<td>sure</td>
+<td>点击底部的确认按钮</td>
+</tr>
+<tr>
+<td>cancel</td>
+<td>点击底部的取消按钮</td>
+</tr>
+</tbody>
+</table>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
