@@ -8,7 +8,7 @@ jquery.cityChoice.js
 
 #### Demo
 
-http://wilee.me/demo/cityChoice/demo.html 
+http://wilee.me/jquery.cityChoice.js/example/ 
 
 #### HTML
 
